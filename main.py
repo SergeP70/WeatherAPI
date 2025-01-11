@@ -1,15 +1,18 @@
 # Building a Weather API with Flask
 from flask import Flask, render_template
 
-app = Flask("WeatherAPI")
+app = Flask(__name__)
 
-@app.route("/home")
+@app.route("/")
 def home():
-    return render_template("tutorial.html")
+    return render_template("home.html")
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
+@app.route("/api/v1/<station>/<date>")
+def contact(station, date):
+    return {"Station: ": station,
+            "Date: ": date,
+            "Temperature:": 23}
 
-app.run(debug=True)
+if __name__ == 'main':
+    app.run(debug=True)
 
